@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru" data-theme="night">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>3D-эмблема</title>
+    <meta name="description" content="Интерактивная 3D-эмблема: металл, эмаль, эпоксидная смола." />
+    <meta name="theme-color" content="#161010" />
+    <link rel="icon" id="favicon" href="data:," />
+  </head>
+  <body>
+    <div class="app" id="app">
+      <main class="viewer" id="viewer">
+        <canvas id="scene" aria-label="3D-эмблема. Потяните, чтобы повернуть; клик — перевернуть."></canvas>
+        <div class="labels" id="labels"></div>
+        <header class="viewer-top" role="banner">
+          <a class="brand" id="brand" target="_blank" rel="noopener"></a>
+          <div class="top-actions">
+            <a class="chip-link" id="siteLink" target="_blank" rel="noopener"></a>
+            <button class="icon-btn" id="togglePanel" title="Панель настроек (H)" aria-label="Панель настроек"></button>
+          </div>
+        </header>
+        <div class="hint" id="hint">Потяните — повернуть · Клик — перевернуть</div>
+        <nav class="dock" id="dock" aria-label="Версия логотипа"></nav>
+        <div class="toast" id="toast" role="status"></div>
+        <div class="loader" id="loader"><div><i></i>Загрузка</div></div>
+      </main>
+      <aside class="panel" id="panel" aria-label="Настройки"></aside>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

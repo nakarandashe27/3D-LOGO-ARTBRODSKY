@@ -1,0 +1,1165 @@
+/* =====================================================================================
+   Интерфейс в фирменном стиле онлайн-школы ÁРТ.БРÓДСКИЙ
+   Брендбук: чёрный #161010, белый, градиент #F74C2E → #4D61F4; Unbounded + Inter Tight.
+   Сайт artbrodsky.ru: тёмные секции #262626, светлые #FFFFFF / #F5F5F5, кнопки-«пилюли»
+   (radius 30px), карточки со скруглением 30px, серый текст навигации #8A8787.
+   ===================================================================================== */
+
+:root {
+  --brand-red: #f74c2e;
+  --brand-blue: #4d61f4;
+  --brand-black: #161010;
+  --grad: linear-gradient(135deg, #f74c2e 0%, #f24c32 34%, #b45376 60%, #615fdc 82%, #4d61f4 100%);
+  --accent: #f74c2e;
+
+  --font-display: 'Unbounded Variable';
+  --font-ui: 'Inter Tight Variable';
+
+  --page: #0b0808;
+  --stage-a: #2c2525;
+  --stage-b: #161010;
+  --stage-c: #080606;
+  --stage-border: rgba(255, 255, 255, 0.06);
+
+  --panel: #161010;
+  --panel-border: rgba(255, 255, 255, 0.07);
+  --sep: rgba(255, 255, 255, 0.06);
+  --ctrl: rgba(255, 255, 255, 0.045);
+  --ctrl-hover: rgba(255, 255, 255, 0.085);
+  --ctrl-border: rgba(255, 255, 255, 0.07);
+  --ctrl-on: #f5f5f5;
+  --ctrl-on-text: #161010;
+  --text: #ffffff;
+  --text-2: rgba(255, 255, 255, 0.62);
+  --text-3: rgba(255, 255, 255, 0.38);
+
+  /* поверх сцены: шапка, подписи слоёв, панель версий */
+  --label: #ffffff;
+  --label-2: rgba(255, 255, 255, 0.6);
+  --label-line: rgba(255, 255, 255, 0.32);
+  --glass: rgba(22, 16, 16, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-hover: rgba(255, 255, 255, 0.07);
+
+  --r-card: 24px;
+  --r-pill: 999px;
+  color-scheme: dark;
+}
+
+:root[data-theme='graphite'] {
+  --page: #121212;
+  --stage-a: #3d3d3d;
+  --stage-b: #262626;
+  --stage-c: #171717;
+  --panel: #1d1d1d;
+  --glass: rgba(30, 30, 30, 0.6);
+}
+
+:root[data-theme='gradient'] {
+  --stage-a: #b45376;
+  --stage-b: #c14952;
+  --stage-c: #4d61f4;
+  --stage-border: rgba(255, 255, 255, 0.1);
+  --label-2: rgba(255, 255, 255, 0.78);
+  --label-line: rgba(255, 255, 255, 0.5);
+  --glass: rgba(22, 16, 16, 0.38);
+  --glass-border: rgba(255, 255, 255, 0.16);
+}
+
+/* «Белый» — как светлые секции сайта: белый фон, графит #262626, серый #8A8787 */
+:root[data-theme='light'] {
+  --page: #f5f5f5;
+  --stage-a: #ffffff;
+  --stage-b: #f5f5f5;
+  --stage-c: #dedede;
+  --stage-border: rgba(0, 0, 0, 0.06);
+  --panel: #ffffff;
+  --panel-border: rgba(0, 0, 0, 0.07);
+  --sep: rgba(0, 0, 0, 0.06);
+  --ctrl: #f5f5f5;
+  --ctrl-hover: #ececec;
+  --ctrl-border: rgba(0, 0, 0, 0.05);
+  --ctrl-on: #262626;
+  --ctrl-on-text: #ffffff;
+  --text: #262626;
+  --text-2: #8a8787;
+  --text-3: #b5b1b1;
+  --label: #262626;
+  --label-2: #8a8787;
+  --label-line: rgba(0, 0, 0, 0.3);
+  --glass: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-hover: rgba(0, 0, 0, 0.05);
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--page);
+  color: var(--text);
+  font-family: var(--font-ui), 'Inter Tight', Arial, system-ui, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  transition: background 0.4s;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: 2px;
+}
+
+.ic {
+  flex-shrink: 0;
+  display: block;
+}
+
+/* ---------------------------------------------------------------- layout */
+
+.app {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  transition: padding 0.35s ease, gap 0.35s ease;
+}
+
+.viewer {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  border-radius: var(--r-card);
+  overflow: hidden;
+  border: 1px solid var(--stage-border);
+  background: radial-gradient(ellipse 75% 70% at 50% 45%, var(--stage-a) 0%, var(--stage-b) 55%, var(--stage-c) 100%);
+  transition: border-radius 0.35s ease, border-color 0.35s, background 0.4s;
+}
+
+:root[data-theme='gradient'] .viewer {
+  background: var(--grad);
+}
+
+.viewer canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  cursor: grab;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.viewer.ready canvas {
+  opacity: 1;
+}
+
+.viewer canvas.over {
+  cursor: pointer;
+}
+
+.viewer canvas.grabbing {
+  cursor: grabbing;
+}
+
+.panel {
+  width: 304px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  transition: width 0.35s ease, opacity 0.25s ease, margin 0.35s ease, border-width 0.35s, background 0.4s;
+}
+
+.app.panel-hidden {
+  padding: 0;
+  gap: 0;
+}
+
+.app.panel-hidden .viewer {
+  border-radius: 0;
+  border-color: transparent;
+}
+
+.app.panel-hidden .panel {
+  width: 0;
+  opacity: 0;
+  border-width: 0;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------- шапка поверх сцены */
+
+.viewer-top {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.brand {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--label);
+  min-width: 0;
+}
+
+.brand-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.brand-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.brand-name {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  min-width: 0;
+}
+
+.brand-name b {
+  font-family: var(--font-display), 'Unbounded', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.brand-name small {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--label-2);
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  pointer-events: auto;
+}
+
+.chip-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 4px 0 14px;
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--label);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: background 0.2s;
+}
+
+.chip-link i {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  color: #161010;
+}
+
+.chip-link:hover {
+  background: var(--glass-hover);
+}
+
+.icon-btn {
+  pointer-events: auto;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--text-2);
+  transition: background 0.2s, color 0.2s;
+}
+
+.viewer .icon-btn {
+  color: var(--label);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.icon-btn:hover {
+  background: var(--ctrl-hover);
+  color: var(--text);
+}
+
+.viewer .icon-btn:hover {
+  background: var(--glass-hover);
+  color: var(--label);
+}
+
+/* ---------------------------------------------------------------- версии логотипа (нижняя панель) */
+
+.dock {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  max-width: calc(100% - 32px);
+  padding: 5px;
+  border-radius: 22px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  overflow-x: auto;
+  scrollbar-width: none;
+  z-index: 3;
+  transition: opacity 0.35s, transform 0.35s;
+}
+
+.dock::-webkit-scrollbar {
+  display: none;
+}
+
+.dock-title {
+  align-self: center;
+  padding: 0 10px 0 9px;
+  font-family: var(--font-display), 'Unbounded', Arial, sans-serif;
+  font-size: 8.5px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--label-2);
+  white-space: nowrap;
+}
+
+.dock-opt {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 5px 13px 5px 5px;
+  border-radius: 17px;
+  color: var(--label);
+  text-align: left;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dock-opt:hover {
+  background: var(--glass-hover);
+}
+
+.dock-thumb {
+  position: relative;
+  width: 44px;
+  height: 40px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  padding: 6px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.06);
+  transition: background 0.2s;
+}
+
+:root[data-theme='light'] .dock-thumb {
+  background: #f5f5f5;
+}
+
+.dock-thumb svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.dock-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.dock-text b {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.dock-text small {
+  font-size: 10.5px;
+  font-weight: 300;
+  color: var(--label-2);
+}
+
+/* активная версия — белая «пилюля», как кнопки на тёмных секциях сайта */
+.dock-opt.active {
+  background: #ffffff;
+  color: #161010;
+}
+
+.dock-opt.active small {
+  color: #8a8787;
+}
+
+.dock-opt.active .dock-thumb {
+  background: #161010;
+  color: #ffffff;
+}
+
+:root[data-theme='light'] .dock-opt.active {
+  background: #262626;
+  color: #ffffff;
+}
+
+:root[data-theme='light'] .dock-opt.active small {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.app.panel-hidden .dock {
+  opacity: 0;
+  transform: translate(-50%, 12px);
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------- подсказка, тост, загрузка */
+
+.hint {
+  position: absolute;
+  left: 50%;
+  bottom: 86px;
+  transform: translateX(-50%);
+  padding: 7px 14px;
+  border-radius: var(--r-pill);
+  font-size: 11.5px;
+  font-weight: 300;
+  color: var(--label-2);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.6s;
+  z-index: 3;
+}
+
+.app.panel-hidden .hint {
+  bottom: 22px;
+}
+
+.hint.hidden {
+  opacity: 0;
+}
+
+.toast {
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  transform: translate(-50%, -8px);
+  padding: 10px 18px;
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  color: #ffffff;
+  background: rgba(22, 16, 16, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s;
+  z-index: 5;
+  max-width: calc(100% - 32px);
+  text-align: center;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.loader {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--label-2);
+  font-family: var(--font-display), 'Unbounded', Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: opacity 0.6s;
+  z-index: 4;
+  text-align: center;
+}
+
+.loader.done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader i {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0 25%, #f74c2e 55%, #4d61f4 100%);
+  -webkit-mask: radial-gradient(circle, transparent 11px, #000 11.5px);
+  mask: radial-gradient(circle, transparent 11px, #000 11.5px);
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------------------------------------------------------------- подписи слоёв */
+
+.labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  will-change: transform, opacity;
+}
+
+.label-dot {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  left: -3.5px;
+  top: -3.5px;
+  border-radius: 50%;
+  background: var(--grad);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.85);
+}
+
+.label-line {
+  position: absolute;
+  left: -0.5px;
+  width: 1px;
+  height: var(--len);
+  background: var(--label-line);
+}
+
+.label.top .label-line {
+  bottom: 0;
+}
+
+.label.bottom .label-line {
+  top: 0;
+}
+
+.label-text {
+  position: absolute;
+  left: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  text-align: center;
+  line-height: 1.35;
+}
+
+.label.top .label-text {
+  bottom: calc(var(--len) + 6px);
+}
+
+.label.bottom .label-text {
+  top: calc(var(--len) + 6px);
+}
+
+.label-text b {
+  display: block;
+  font-family: var(--font-display), 'Unbounded', Arial, sans-serif;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.label-text span {
+  display: block;
+  margin-top: 1px;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--label-2);
+}
+
+/* ---------------------------------------------------------------- панель настроек */
+
+.panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 18px 14px 14px 20px;
+  border-bottom: 1px solid var(--sep);
+  min-width: 302px;
+}
+
+.panel-title {
+  margin: 0;
+  font-family: var(--font-display), 'Unbounded', Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.panel-sub {
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-2);
+}
+
+.panel-head .icon-btn {
+  margin-top: -4px;
+  background: var(--ctrl);
+}
+
+.panel-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 6px 0 14px;
+  min-width: 302px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(127, 127, 127, 0.3) transparent;
+}
+
+.sec {
+  padding: 6px 20px 12px;
+}
+
+.sec + .sec {
+  border-top: 1px solid var(--sep);
+  padding-top: 8px;
+}
+
+.sec-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0 10px;
+  font-family: var(--font-display), 'Unbounded', Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.sec-head .ic {
+  color: var(--text-3);
+  transform: rotate(180deg);
+  transition: transform 0.2s;
+}
+
+.sec.collapsed .sec-head .ic {
+  transform: none;
+}
+
+.sec.collapsed .sec-body {
+  display: none;
+}
+
+.sec-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ctrl[hidden] {
+  display: none;
+}
+
+.ctrl-label {
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 0 7px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-2);
+}
+
+.ctrl-value {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+/* сегменты — «пилюли» как переключатели на сайте */
+.segment {
+  display: grid;
+  grid-template-columns: repeat(var(--n), 1fr);
+  padding: 3px;
+  gap: 2px;
+  border-radius: var(--r-pill);
+  background: var(--ctrl);
+  border: 1px solid var(--ctrl-border);
+}
+
+.segment .opt {
+  height: 28px;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 6px;
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  color: var(--text-2);
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.segment .opt span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.segment .opt:hover {
+  color: var(--text);
+}
+
+.segment .opt.active {
+  background: var(--ctrl-on);
+  color: var(--ctrl-on-text);
+  font-weight: 600;
+}
+
+.pills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.pills .opt {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px 0 7px;
+  border-radius: var(--r-pill);
+  background: var(--ctrl);
+  border: 1px solid var(--ctrl-border);
+  font-size: 11.5px;
+  color: var(--text-2);
+  text-align: left;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  min-width: 0;
+}
+
+.pills .opt span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pills .opt:hover {
+  background: var(--ctrl-hover);
+  color: var(--text);
+}
+
+.pills .opt.active {
+  background: var(--ctrl-on);
+  border-color: var(--ctrl-on);
+  color: var(--ctrl-on-text);
+  font-weight: 600;
+}
+
+.dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px rgba(127, 127, 127, 0.28) inset;
+}
+
+.dot-none {
+  border: 1px dashed var(--text-3);
+  box-shadow: none;
+}
+
+.dot-pattern {
+  border-radius: 50%;
+  background-size: cover;
+  background-color: #161010;
+  opacity: 0.9;
+}
+
+.toggle {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 8px 0 14px;
+  border-radius: var(--r-pill);
+  background: var(--ctrl);
+  border: 1px solid var(--ctrl-border);
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.toggle span {
+  flex: 1;
+  text-align: left;
+}
+
+.toggle.on {
+  color: var(--text);
+}
+
+.switch {
+  position: relative;
+  width: 34px;
+  height: 20px;
+  border-radius: var(--r-pill);
+  background: rgba(127, 127, 127, 0.32);
+  transition: background 0.2s;
+}
+
+.switch::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: transform 0.2s;
+}
+
+.toggle.on .switch {
+  background: var(--grad);
+}
+
+.toggle.on .switch::after {
+  transform: translateX(14px);
+}
+
+.note {
+  margin: -4px 0 0;
+  font-size: 11px;
+  font-weight: 300;
+  line-height: 1.45;
+  color: var(--text-3);
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  margin: 8px 0;
+  border-radius: var(--r-pill);
+  background: linear-gradient(to right, var(--brand-red), var(--brand-blue) var(--p, 50%), rgba(127, 127, 127, 0.3) var(--p, 50%));
+  outline: none;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+.slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 18px;
+  background: var(--ctrl);
+  border: 1px solid var(--ctrl-border);
+  text-align: left;
+  color: var(--text-2);
+  transition: background 0.2s, color 0.2s;
+}
+
+.action:hover {
+  background: var(--ctrl-hover);
+  color: var(--text);
+}
+
+.action b {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.action small {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 300;
+  color: var(--text-3);
+}
+
+.panel-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px;
+  border-top: 1px solid var(--sep);
+  min-width: 302px;
+}
+
+.foot-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 6px 0 14px;
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  color: var(--text-2);
+  transition: background 0.2s, color 0.2s, filter 0.2s;
+}
+
+.foot-btn span {
+  flex: 1;
+  text-align: left;
+}
+
+.foot-btn:hover {
+  background: var(--ctrl-hover);
+  color: var(--text);
+}
+
+/* главная кнопка — градиентная «пилюля» с белым кружком, как «Хочу поступить» на сайте */
+.foot-btn.primary {
+  height: 46px;
+  padding: 0 6px 0 18px;
+  background: var(--grad);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.foot-btn.primary:hover {
+  background: var(--grad);
+  filter: brightness(1.08) saturate(1.05);
+}
+
+kbd {
+  font: inherit;
+  font-size: 10.5px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-pill);
+  background: var(--ctrl);
+  color: var(--text-2);
+}
+
+.foot-btn.primary kbd {
+  width: 34px;
+  height: 34px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #ffffff;
+  color: #161010;
+}
+
+/* ---------------------------------------------------------------- адаптив */
+
+@media (max-width: 1320px) {
+  .dock-text small {
+    display: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .dock-title {
+    display: none;
+  }
+}
+
+@media (max-width: 820px) {
+  .app {
+    flex-direction: column;
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .viewer {
+    flex: none;
+    height: 60%;
+    border-radius: 20px;
+  }
+
+  .app.panel-hidden .viewer {
+    height: 100%;
+  }
+
+  .panel {
+    width: auto;
+    flex: 1;
+    min-height: 0;
+    border-radius: 20px;
+  }
+
+  .app.panel-hidden .panel {
+    width: auto;
+    height: 0;
+    flex: 0;
+  }
+
+  .panel-head,
+  .panel-body,
+  .panel-foot {
+    min-width: 0;
+  }
+
+  /* на телефоне кнопки футера — в одну строку, без подсказок клавиш */
+  .panel-foot {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .foot-btn.primary {
+    flex: 1;
+  }
+
+  .foot-btn:not(.primary) {
+    flex: none;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    justify-content: center;
+    background: var(--ctrl);
+  }
+
+  .foot-btn:not(.primary) span,
+  .foot-btn:not(.primary) kbd {
+    display: none;
+  }
+
+  .viewer-top {
+    top: 10px;
+    left: 12px;
+    right: 10px;
+  }
+
+  .brand-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .brand-name b {
+    font-size: 11.5px;
+  }
+
+  .chip-link {
+    display: none;
+  }
+
+  .dock {
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    transform: none;
+    max-width: none;
+    border-radius: 18px;
+  }
+
+  .app.panel-hidden .dock {
+    transform: translateY(12px);
+  }
+
+  .dock-opt {
+    padding-right: 10px;
+  }
+
+  .dock-thumb {
+    width: 36px;
+    height: 34px;
+    padding: 5px;
+    border-radius: 11px;
+  }
+
+  .hint {
+    bottom: 68px;
+    font-size: 11px;
+  }
+}
